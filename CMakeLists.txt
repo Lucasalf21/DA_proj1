@@ -17,4 +17,6 @@ add_executable(proj1_2324 src/main.cpp
         src/Menu.h
         src/Menu.cpp
         src/Graph.h
+        src/Data.h
+        src/Data.cpp
 )
