@@ -16,7 +16,7 @@ void FileReader::readCities(std::string filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
-        cout << "Error opening file!" << filename << endl;
+        cerr << "Error opening file!" << filename << endl;
         return;
     }
 
@@ -31,7 +31,7 @@ void FileReader::readCities(std::string filename) {
         getline(ss, id, ',');
         getline(ss, code, ',');
         getline(ss, demand, ',');
-        getline(ss, population, ',');
+        getline(ss, population, '\r');
 
         City* city = new City(name, stoi(id), code, stoi(demand), stoi(population));
         data->newCity(city);
@@ -45,7 +45,7 @@ void FileReader::readPipes(std::string filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
-        cout << "Error opening file!" << filename << endl;
+        cerr << "Error opening file!" << filename << endl;
         return;
     }
 
@@ -59,7 +59,7 @@ void FileReader::readPipes(std::string filename) {
         getline(ss, serviceA, ',');
         getline(ss, serviceB, ',');
         getline(ss, capacity, ',');
-        getline(ss, direction, ',');
+        getline(ss, direction, '\r');
 
         Pipe* pipe = new Pipe(serviceA, serviceB, stoi(capacity), stoi(direction));
         data->newPipe(pipe);
@@ -73,7 +73,7 @@ void FileReader::readReservoirs(std::string filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
-        cout << "Error opening file!" << filename << endl;
+        cerr << "Error opening file!" << filename << endl;
         return;
     }
 
@@ -88,7 +88,7 @@ void FileReader::readReservoirs(std::string filename) {
         getline(ss, municipality, ',');
         getline(ss, id, ',');
         getline(ss, code, ',');
-        getline(ss, maxDelivery, ',');
+        getline(ss, maxDelivery, '\r');
 
         Reservoir* reservoir = new Reservoir(name, municipality, stoi(id), code, stoi(maxDelivery));
         data->newReservoir(reservoir);
@@ -102,7 +102,7 @@ void FileReader::readStations(std::string filename) {
     ifstream file(filename);
 
     if (!file.is_open()) {
-        cout << "Error opening file!" << filename << endl;
+        cerr << "Error opening file!" << filename << endl;
         return;
     }
 
@@ -114,7 +114,7 @@ void FileReader::readStations(std::string filename) {
         string id, code;
 
         getline(ss, id, ',');
-        getline(ss, code, ',');
+        getline(ss, code, '\r');
 
         Station* station = new Station(stoi(id), code);
         data->newStation(station);

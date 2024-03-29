@@ -19,4 +19,6 @@ add_executable(proj1_2324 src/main.cpp
         src/Graph.h
         src/Data.h
         src/Data.cpp
+        src/GraphLoader.h
+        src/GraphLoader.cpp
 )

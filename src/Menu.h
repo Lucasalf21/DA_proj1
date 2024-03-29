@@ -6,8 +6,16 @@
 #define PROJ1_2324_MENU_H
 
 
-class Menu {
+#include "Data.h"
+#include "Graph.h"
 
+class Menu {
+private:
+    Data* data;
+    Graph<string>* g;
+
+public:
+    Menu(Data* data, Graph<string>* g);
 };
 
 

@@ -9,6 +9,7 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
+#include <string>
 
 template <class T>
 class Edge;
@@ -100,7 +101,9 @@ public:
     /*
     * Auxiliary function to find a vertex with a given the content.
     */
+
     Vertex<T> *findVertex(const T &in) const;
+
     /*
      *  Adds a vertex with a given content or info (in) to a graph (this).
      *  Returns true if successful, and false if a vertex with that content already exists.
@@ -113,7 +116,7 @@ public:
      * destination vertices and the edge weight (w).
      * Returns true if successful, and false if the source or destination vertex does not exist.
      */
-    bool addEdge(const T &sourc, const T &dest, double w);
+    bool addEdge(const T &sourc, const T &dest, int w);
     bool removeEdge(const T &source, const T &dest);
     bool addBidirectionalEdge(const T &sourc, const T &dest, double w);
 
@@ -128,8 +131,11 @@ public:
     bool isDAG() const;
     bool dfsIsDAG(Vertex<T> *v) const;
     std::vector<T> topsort() const;
+
+    int getNumEdges() const;
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
+    int numEdges;
 
     double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
@@ -411,12 +417,14 @@ bool Graph<T>::removeVertex(const T &in) {
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, int w) {
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
-    if (v1 == nullptr || v2 == nullptr)
+    if (v1 == nullptr || v2 == nullptr) {
         return false;
+    }
     v1->addEdge(v2, w);
+    numEdges++;
     return true;
 }
 
@@ -660,6 +668,11 @@ template <class T>
 Graph<T>::~Graph() {
     deleteMatrix(distMatrix, vertexSet.size());
     deleteMatrix(pathMatrix, vertexSet.size());
+}
+
+template <class T>
+int Graph<T>::getNumEdges() const {
+    return numEdges;
 }
 
 /******************  Edmonds-Karp  ********************/
