@@ -120,6 +120,7 @@ public:
     bool addEdge(const T &sourc, const T &dest, int w);
     bool removeEdge(const T &source, const T &dest);
     bool addBidirectionalEdge(const T &sourc, const T &dest, double w);
+    bool findEdge(const T &sourc, const T &dest);
 
     int getNumVertex() const;
     std::vector<Vertex<T> *> getVertexSet() const;
@@ -134,6 +135,7 @@ public:
     std::vector<T> topsort() const;
 
     int getNumEdges() const;
+    Graph<T> cloneGraph();
 protected:
     std::vector<Vertex<T> *> vertexSet;    // vertex set
     int numEdges;
@@ -457,6 +459,20 @@ bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w) {
     return true;
 }
 
+template <class T>
+bool Graph<T>::findEdge(const T &sourc, const T &dest){
+    Vertex<T> * srcVertex = findVertex(sourc);
+    if (srcVertex == nullptr) {
+        return false;
+    }
+    for (auto e : srcVertex->getAdj()) {
+        if (e->getDest()->getInfo() == dest) {
+            return true;
+        }
+    }
+    return false;
+}
+
 /****************** DFS ********************/
 
 /*
@@ -675,6 +691,33 @@ Graph<T>::~Graph() {
 template <class T>
 int Graph<T>::getNumEdges() const {
     return numEdges;
+}
+
+template <class T>
+Graph<T> Graph<T>::cloneGraph() {
+    Graph<T> copy;
+
+    // Map from original vertices to their corresponding copies in the copy graph
+    std::unordered_map<Vertex<T>*, Vertex<T>*> vertexMap;
+
+    // Copy vertices
+    for (Vertex<T>* vertex : vertexSet) {
+        T info = vertex->getInfo();
+        copy.addVertex(info);
+        vertexMap[vertex] = copy.findVertex(info);
+    }
+
+    // Copy edges
+    for (Vertex<T>* vertex : vertexSet) {
+        for (Edge<T>* edge : vertex->getAdj()) {
+            T sourceInfo = vertex->getInfo();
+            T destInfo = edge->getDest()->getInfo();
+            double weight = edge->getWeight();
+            copy.addEdge(sourceInfo, destInfo, weight);
+        }
+    }
+
+    return copy;
 }
 
 #endif //PROJ1_2324_GRAPH_H

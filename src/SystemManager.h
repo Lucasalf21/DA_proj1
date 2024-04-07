@@ -11,7 +11,7 @@
 class SystemManager {
 public:
     SystemManager();
-    void edmondsKarp(Graph<std::string>* g, Data* data);
+    void edmondsKarp(Graph<std::string> g, Data* data);
 };
 
 

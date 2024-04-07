@@ -82,36 +82,36 @@ void augmentFlowAlongPath(Vertex<string>* s, Vertex<string>* t, double f) {
 }
 
 // Main function implementing the Edmonds-Karp algorithm with super source and super sink
-void SystemManager::edmondsKarp(Graph<string>* g, Data* data) {
-    g->addVertex("Super Source");
-    g->addVertex("Super Sink");
+void SystemManager::edmondsKarp(Graph<string> g, Data* data) {
+    g.addVertex("Super Source");
+    g.addVertex("Super Sink");
 
-    Vertex<string>* superSource = g->findVertex("Super Source");
-    Vertex<string>* superSink = g->findVertex("Super Sink");
+    Vertex<string>* superSource = g.findVertex("Super Source");
+    Vertex<string>* superSink = g.findVertex("Super Sink");
 
     // Connect super source to all vertices with prefix 'R'
-    for (auto v : g->getVertexSet()) {
+    for (auto v : g.getVertexSet()) {
         if (v->getInfo()[0] == 'R') {
             superSource->addEdge(v, data->findReservoir(v->getInfo()).getMaxDelivery());
         }
     }
 
     // Connect all vertices with prefix 'C' to the super sink
-    for (auto v : g->getVertexSet()) {
+    for (auto v : g.getVertexSet()) {
         if (v->getInfo()[0] == 'C') {
             v->addEdge(superSink, data->findCity(v->getInfo()).getDemand());
         }
     }
 
     // Initialize flow on all edges to 0
-    for (auto v : g->getVertexSet()) {
+    for (auto v : g.getVertexSet()) {
         for (auto e : v->getAdj()) {
             e->setFlow(0);
         }
     }
 
     // While there is an augmenting path, augment the flow along the path
-    while (findAugmentingPath(g, superSource, superSink)) {
+    while (findAugmentingPath(&g, superSource, superSink)) {
         double f = findMinResidualAlongPath(superSource, superSink);
         augmentFlowAlongPath(superSource, superSink, f);
     }

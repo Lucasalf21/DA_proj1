@@ -20,6 +20,11 @@ public:
     void maximumAmountOfWaterSpecific(set<pair<string, double>> res);
     void maximumAmountOfWaterEach(set<pair<string, double>> res, double total);
     void deficitInEach(set<pair<string, double>> res);
+
+    void choice2();
+    void removeReservoir(set<pair<string, double>> originalMaxFlow);
+    void removeStation(set<pair<string, double>> originalMaxFlow);
+    void removePipe(set<pair<string, double>> originalMaxFlow);
 };
 
 
