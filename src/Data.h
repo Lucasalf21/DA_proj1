@@ -9,27 +9,31 @@
 #include "Pipe.h"
 #include "Reservoir.h"
 #include "Station.h"
+#include <map>
 #include <set>
 
 using namespace std;
 
 class Data {
 private:
-    set<City*> cities;
-    set<Pipe*> pipes;
-    set<Reservoir*> reservoirs;
-    set<Station*> stations;
+    map<string, City*> cities = {};
+    set<Pipe*> pipes = {};
+    map<string, Reservoir*> reservoirs = {};
+    map<string, Station*> stations = {};
 
 public:
     Data();
-    void newCity(City* city);
-    void newPipe(Pipe* pipe);
-    void newReservoir(Reservoir* reservoir);
-    void newStation(Station* station);
-    set<City*> getCities();
+    void newCity(City *city, string code);
+    void newPipe(Pipe *pipe);
+    void newReservoir(Reservoir *reservoir, string code);
+    void newStation(Station *station, string code);
+    map<string, City*> getCities();
     set<Pipe*> getPipes();
-    set<Reservoir*> getReservoirs();
-    set<Station*> getStations();
+    map<string, Reservoir*> getReservoirs();
+    map<string, Station*> getStations();
+
+    City findCity(string code);
+    Reservoir findReservoir(string code);
 };
 
 

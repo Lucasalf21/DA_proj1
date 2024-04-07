@@ -16,6 +16,10 @@ private:
 
 public:
     Menu(Data* data, Graph<string>* g);
+    void choice1();
+    void maximumAmountOfWaterSpecific(set<pair<string, double>> res);
+    void maximumAmountOfWaterEach(set<pair<string, double>> res, double total);
+    void deficitInEach(set<pair<string, double>> res);
 };
 
 

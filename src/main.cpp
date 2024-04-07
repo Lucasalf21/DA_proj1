@@ -7,8 +7,6 @@
 using namespace std;
 
 int main() {
-    cout << "Please wait while the data is loaded..." << endl;
-
     string directory = "../large_data/";
     Data* data = new Data();
     auto* g = new Graph<string>();
@@ -22,9 +20,8 @@ int main() {
     graphLoader->loadVertex();
     graphLoader->loadPipes();
 
-    cout << endl << "-------------------------------------" << endl;
     cout << " Welcome to the Water Supply System!" << endl;
-    cout << "-------------------------------------" << endl << endl;
+
     Menu menu(data, g);
 
     return 0;

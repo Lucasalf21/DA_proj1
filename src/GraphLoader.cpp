@@ -11,18 +11,23 @@ GraphLoader::GraphLoader(Data* data, Graph<string>* g) {
 
 void GraphLoader::loadVertex() {
     for (auto c : data->getCities()){
-        g->addVertex(c->getCode());
+        g->addVertex(c.second->getCode());
     }
     for (auto r : data->getReservoirs()){
-        g->addVertex(r->getCode());
+        g->addVertex(r.second->getCode());
     }
     for (auto s : data->getStations()){
-        g->addVertex(s->getCode());
+        g->addVertex(s.second->getCode());
     }
 }
 
 void GraphLoader::loadPipes() {
     for (auto p : data->getPipes()){
-        g->addEdge(p->getServiceA(), p->getServiceB(), p->getCapacity());
+        if (p->getDirection() == 1) {
+            g->addEdge(p->getServiceA(), p->getServiceB(), p->getCapacity());
+        }
+        else{
+            g->addBidirectionalEdge(p->getServiceA(), p->getServiceB(), p->getCapacity());
+        }
     }
 }

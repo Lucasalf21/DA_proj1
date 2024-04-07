@@ -34,7 +34,7 @@ void FileReader::readCities(std::string filename) {
         getline(ss, population, '\r');
 
         City* city = new City(name, stoi(id), code, stoi(demand), stoi(population));
-        data->newCity(city);
+        data->newCity(city, code);
     }
 
     file.close();
@@ -91,7 +91,7 @@ void FileReader::readReservoirs(std::string filename) {
         getline(ss, maxDelivery, '\r');
 
         Reservoir* reservoir = new Reservoir(name, municipality, stoi(id), code, stoi(maxDelivery));
-        data->newReservoir(reservoir);
+        data->newReservoir(reservoir, code);
     }
 
     file.close();
@@ -117,7 +117,7 @@ void FileReader::readStations(std::string filename) {
         getline(ss, code, '\r');
 
         Station* station = new Station(stoi(id), code);
-        data->newStation(station);
+        data->newStation(station, code);
     }
 
     file.close();
