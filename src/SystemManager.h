@@ -11,7 +11,7 @@
 class SystemManager {
 public:
     SystemManager();
-    /*
+    /**
      * @brief Calculate the max flow to each city using the Edmonds-Karp algorithm. Complexity O(V * E^2).
      * @param g The graph with the cities, reservoirs, stations and pipes.
      */

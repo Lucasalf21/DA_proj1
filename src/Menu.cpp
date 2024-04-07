@@ -2,7 +2,6 @@
 // Created by lucasalf on 27-03-2024.
 //
 
-#include <valarray>
 #include "Menu.h"
 #include "SystemManager.h"
 

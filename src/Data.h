@@ -24,35 +24,35 @@ private:
 public:
     Data();
 
-    /*
+    /**
      * @brief Adds a new city to the cities map, with its code as the key. Complexity O(1).
      * @param city The city to be added.
      * @param code The code of the city.
      */
     void newCity(City *city, string code);
-    /*
+    /**
      * @brief Adds a new pipe to the pipes set. Complexity O(1).
      * @param pipe The pipe to be added.
      */
     void newPipe(Pipe *pipe);
-    /*
+    /**
      * @brief Adds a new reservoir to the reservoirs map, with its code as the key. Complexity O(1).
      * @param reservoir The reservoir to be added.
      * @param code The code of the reservoir.
      */
     void newReservoir(Reservoir *reservoir, string code);
-    /*
+    /**
      * @brief Adds a new station to the stations map, with its code as the key. Complexity O(1).
      * @param station The station to be added.
      * @param code The code of the station.
      */
     void newStation(Station *station, string code);
-    /*
+    /**
      * @brief Returns a pointer to the city with the given code. Complexity O(1).
      * @param code The code of the city.
      */
     City* findCity(string code);
-    /*
+    /**
      * @brief Returns a pointer to the reservoir with the given code. Complexity O(1).
      * @param code The code of the reservoir.
      */
