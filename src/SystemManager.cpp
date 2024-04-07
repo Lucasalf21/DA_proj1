@@ -92,14 +92,14 @@ void SystemManager::edmondsKarp(Graph<string> g, Data* data) {
     // Connect super source to all vertices with prefix 'R'
     for (auto v : g.getVertexSet()) {
         if (v->getInfo()[0] == 'R') {
-            superSource->addEdge(v, data->findReservoir(v->getInfo()).getMaxDelivery());
+            superSource->addEdge(v, data->findReservoir(v->getInfo())->getMaxDelivery());
         }
     }
 
     // Connect all vertices with prefix 'C' to the super sink
     for (auto v : g.getVertexSet()) {
         if (v->getInfo()[0] == 'C') {
-            v->addEdge(superSink, data->findCity(v->getInfo()).getDemand());
+            v->addEdge(superSink, data->findCity(v->getInfo())->getDemand());
         }
     }
 

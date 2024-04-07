@@ -19,7 +19,13 @@ private:
 
 public:
     GraphLoader(Data* data, Graph<string>* g);
+    /*
+     * @brief Loads the cities, reservoirs and pumping stations as vertices of the graph. Complexity O(V).
+     */
     void loadVertex();
+    /*
+     * @brief Loads the pipes as edges of the graph. Complexity O(E).
+     */
     void loadPipes();
 };
 

@@ -38,10 +38,10 @@ map<string, Station *> Data::getStations() {
     return stations;
 }
 
-City Data::findCity(string code) {
-    return *cities[code];
+City* Data::findCity(string code) {
+    return cities[code];
 }
 
-Reservoir Data::findReservoir(string code) {
-    return *reservoirs[code];
+Reservoir* Data::findReservoir(string code) {
+    return reservoirs[code];
 }

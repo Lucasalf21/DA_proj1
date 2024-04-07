@@ -20,7 +20,7 @@ int main() {
     graphLoader->loadVertex();
     graphLoader->loadPipes();
 
-    cout << " Welcome to the Water Supply System!" << endl;
+    cout << " Welcome to the Water Supply Management System!" << endl;
 
     Menu menu(data, g);
 

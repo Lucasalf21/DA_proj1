@@ -95,9 +95,14 @@ void Menu::maximumAmountOfWaterSpecific(set<pair<string, double>> res) {
     cout << "Please enter the city code (C_x): ";
     cin >> city;
 
+    if (g->findVertex(city) == nullptr){
+        cout << "City not found!" << endl;
+        return;
+    }
+
     for (const auto& p : res){
         if (p.first == city){
-            cout << data->findCity(p.first).getName() << " - " << p.second << " m3" << endl;
+            cout << data->findCity(p.first)->getName() << " - " << p.second << " m3" << endl;
             return;
         }
     }
@@ -105,17 +110,17 @@ void Menu::maximumAmountOfWaterSpecific(set<pair<string, double>> res) {
 
 void Menu::maximumAmountOfWaterEach(set<pair<string, double>> res, double total) {
     for (const auto& p : res){
-        cout << data->findCity(p.first).getName() << " - " << p.second << " m3" << endl;
+        cout << data->findCity(p.first)->getName() << " - " << p.second << " m3" << endl;
     }
-    cout << "Total: " << total << " m3" << endl;
+    cout << endl << "Total: " << total << " m3" << endl;
 }
 
 void Menu::deficitInEach(set<pair<string, double>> res) {
     for (auto p : res){
-        double deficit = data->findCity(p.first).getDemand() - p.second;
+        double deficit = data->findCity(p.first)->getDemand() - p.second;
         if (deficit > 0){
-            cout << data->findCity(p.first).getName() << ": " << endl
-                 << "- Demand: " << data->findCity(p.first).getDemand() << " m3" << endl
+            cout << data->findCity(p.first)->getName() << ": " << endl
+                 << "- Demand: " << data->findCity(p.first)->getDemand() << " m3" << endl
                  << "- Actual Flow: " << p.second << " m3" << endl
                  << "- Deficit: " << deficit << " m3" << endl
                  << endl;
@@ -143,7 +148,7 @@ void Menu::choice2() {
         cout << endl << " _______________RELIABILITY AND SENSITIVITY TO FAILURES________________ " << endl
              << "1 - Remove a reservoir" << endl
              << "2 - Remove a pumping station" << endl
-             << "3 - Remove a pipe" << endl
+             << "3 - Remove one or more pipes" << endl
 
              << endl << "9 - Return to the previous menu" << endl
              << "0 - Exit" << endl
@@ -162,6 +167,7 @@ void Menu::choice2() {
             case '3':
                 removePipe(originalMaxFlow);
                 break;
+
             case '9':
                 return;
             case '0':
@@ -204,7 +210,7 @@ void Menu::removeReservoir(set<pair<string, double>> originalMaxFlow) {
     for (auto p1 : originalMaxFlow){
         for (auto p2 : newMaxFlow){
             if (p1.first == p2.first && p1.second != p2.second){
-                cout << data->findCity(p1.first).getName() << ": " << endl
+                cout << data->findCity(p1.first)->getName() << ": " << endl
                      << "- Old Flow: " << p1.second << " m3" << endl
                      << "- New Flow: " << p2.second << " m3" << endl << endl;
             }
@@ -244,7 +250,7 @@ void Menu::removeStation(set<pair<string, double>> originalMaxFlow) {
     for (auto p1 : originalMaxFlow){
         for (auto p2 : newMaxFlow){
             if (p1.first == p2.first && p1.second != p2.second){
-                cout << data->findCity(p1.first).getName() << ": " << endl
+                cout << data->findCity(p1.first)->getName() << ": " << endl
                      << "- Old Flow: " << p1.second << " m3" << endl
                      << "- New Flow: " << p2.second << " m3" << endl << endl;
             }
@@ -302,7 +308,7 @@ void Menu::removePipe(set<pair<string, double>> originalMaxFlow) {
     for (auto p1 : originalMaxFlow){
         for (auto p2 : newMaxFlow){
             if (p1.first == p2.first && p1.second != p2.second){
-                cout << data->findCity(p1.first).getName() << ": " << endl
+                cout << data->findCity(p1.first)->getName() << ": " << endl
                      << "- Old Flow: " << p1.second << " m3" << endl
                      << "- New Flow: " << p2.second << " m3" << endl << endl;
             }

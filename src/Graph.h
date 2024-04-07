@@ -693,6 +693,10 @@ int Graph<T>::getNumEdges() const {
     return numEdges;
 }
 
+/*
+ * Makes a deep copy of a graph (this).
+ */
+
 template <class T>
 Graph<T> Graph<T>::cloneGraph() {
     Graph<T> copy;
